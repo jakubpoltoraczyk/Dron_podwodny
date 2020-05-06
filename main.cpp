@@ -5,7 +5,7 @@
 int main()
 {
     using namespace std;
-    int length,high;
+    double length,high;
     uint id;
     std::ifstream plik;
     plik.open("plik");
@@ -20,6 +20,7 @@ int main()
     cout << "Podaj 'n': ";
     while(cin.get()!='n');
     cub.move(id,20,30);
+    while(cin.get()!='n');
     plik.close();
     return 0;
 }

@@ -15,7 +15,7 @@ public:
     }
     virtual ~Solid() {}
     virtual uint draw() = 0; 
-    virtual void move(uint id,int length,int high) = 0;
+    virtual void move(uint id,double length,double high) = 0;
     virtual void rotate(const Rotation_matrix & mat) = 0;
 };
 

@@ -11,7 +11,7 @@ private:
 public:
     Cuboid(const Vector<double,3> * t,const Vector<double,3> & p,drawNS::APIGnuPlot3D & g);
     uint draw();
-    void move(uint id,int length,int high);
+    void move(uint id,double length,double high);
     void rotate(const Rotation_matrix & mat) {;}
 };
 

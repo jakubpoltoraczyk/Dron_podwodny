@@ -15,22 +15,18 @@ uint Cuboid::draw()
     return id;
 }
 
-void Cuboid::move(uint id,int length,int high)
+void Cuboid::move(uint id,double length,double high)
 {
-    int l_counter = 0,h_counter = 0;
-    clock_t delay = 0.5*CLOCKS_PER_SEC;
-    clock_t start;
-    for(;l_counter<length||h_counter<high;++l_counter,++h_counter)
+    double l_counter = 0.0, h_counter = 0.0;
+    for(;l_counter<length||h_counter<high;l_counter+=0.03,h_counter+=0.03)
     {
         for(int i=0;i<8;++i)
         {
             if(l_counter<length)
-                ++tab[i][0];
+                tab[i][0]+=0.03;
             if(h_counter<high)
-                ++tab[i][2];
+                tab[i][2]+=0.03;
         }
-        start = clock();
-        while(clock()-start<delay);
         gnuplot.erase_shape(id);
         id=draw();
         gnuplot.redraw();
