@@ -81,12 +81,6 @@ bool Vector<T,size>::operator==(const Vector & v)const
     return true;
 }
 
-template <>
-Vector<double,3>::operator drawNS::Point3D()const
-{
-    return drawNS::Point3D(data[0],data[1],data[2]);
-}
-
 template <typename T,int size>
 std::ostream & operator << (std::ostream & o, const Vector<T,size> & v) // przeciazenie operatora << dla klasy Vector
 {
