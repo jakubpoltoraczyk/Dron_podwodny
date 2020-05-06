@@ -10,7 +10,7 @@ protected:
 public:
     Drawing_interface(drawNS::Draw3DAPI * g): gnuplot(g) {}
     virtual ~Drawing_interface() {}
-    virtual uint draw() = 0;
+    virtual void draw() = 0;
 };
 
 #endif // DRAWING_INTERFACE

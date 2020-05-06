@@ -6,7 +6,7 @@ Cuboid::Cuboid(const Vector<double,3> * t,const Vector<double,3> & p, const Matr
         tab[i]=t[i];
 } 
 
-uint Cuboid::draw()
+void Cuboid::draw()
 {
     using std::vector;
     uint id;
@@ -15,10 +15,10 @@ uint Cuboid::draw()
         pom.tab[i]=center_point+rot_mat*tab[i];
     id=gnuplot->draw_polyhedron(vector<vector<drawNS::Point3D>>{{pom.tab[0],pom.tab[1],pom.tab[2],pom.tab[3]},{pom.tab[4],pom.tab[5],pom.tab[6],pom.tab[7]}},"blue");
     gnuplot->redraw();
-    return id;
+    gnuplot->erase_shape(id);
 }
 
-void Cuboid::move(uint id,double angle,double length)
+void Cuboid::move(double angle,double length)
 {
     double move_z = sin(angle)*length/500;
     double move_x = cos(angle)*length/500;
@@ -26,19 +26,15 @@ void Cuboid::move(uint id,double angle,double length)
     {
         center_point[0]+=move_x;
         center_point[2]+=move_z;
-        gnuplot->erase_shape(id);
-        id=draw();
-        gnuplot->redraw();
+        draw();
     }
 }
 
-void Cuboid::rotate(int id, double angle)
+void Cuboid::rotate(double angle)
 {
     rot_mat[0][0]=cos(angle);
     rot_mat[1][1]=cos(angle);
     rot_mat[0][1]=(-1)*sin(angle);
     rot_mat[1][0]=sin(angle);
-    id=draw();
-    gnuplot->erase_shape(id);
-    gnuplot->redraw();
+    draw();
 }

@@ -5,7 +5,6 @@
 int main()
 {
     using namespace std;
-    uint id;
     double length,angle;
     std::ifstream plik;
     plik.open("plik");
@@ -16,12 +15,12 @@ int main()
     plik >> pom_mat; 
     drawNS::APIGnuPlot3D * api_gnu = new drawNS::APIGnuPlot3D(-100,100,-100,100,-100,100,-1);
     Cuboid cub(vec,Vector<double,3>(),pom_mat,api_gnu);
-    id=cub.draw();
+    cub.draw();
     for(;;)
     {
         cout << "Podaj kat i odleglosc do przemierzenia: ";
         cin >> angle >> length;
-        cub.move(id,angle,length);
+        cub.move(angle,length);
         //cout << "Podaj kat zmiany orientacji: ";
         //cin >> angle;
         //cub.rotate(id,angle);
