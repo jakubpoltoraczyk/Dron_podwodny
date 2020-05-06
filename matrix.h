@@ -10,7 +10,7 @@
 template <typename T,int size>
 class Matrix // klasa Matrix opisujaca matematyczna macierz
 {
-private:
+protected:
     Vector<T,size> tab[size]; // tablica wektorow ktore skladaja sie na macierz
 public:
     Matrix(); // konstruktor domyslny klasy Matrix

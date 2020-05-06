@@ -6,7 +6,7 @@
 class Rotation_matrix: public Matrix <double,3>
 {
 public:
-    Rotation_matrix(const Matrix<double,3> & mat);
+     explicit Rotation_matrix(const Matrix<double,3> & mat);
 };
 
 #endif //ROTATION_MATRIX

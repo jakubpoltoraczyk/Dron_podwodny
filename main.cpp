@@ -5,22 +5,27 @@
 int main()
 {
     using namespace std;
-    double length,high;
     uint id;
+    double length,angle;
     std::ifstream plik;
     plik.open("plik");
-    double tab[3]={0.0,0.0,0.0};
     Vector <double,3> vec[8];
-    Vector <double,3> center(tab);
+    Matrix <double,3> pom_mat;
     for(int i=0;i<8;++i)
         plik >> vec[i];
-    drawNS::APIGnuPlot3D api_gnu(80,-80,80,-80,80,-80,-1);
-    Cuboid cub(vec,center,api_gnu);
+    plik >> pom_mat; 
+    drawNS::APIGnuPlot3D * api_gnu = new drawNS::APIGnuPlot3D(-100,100,-100,100,-100,100,-1);
+    Cuboid cub(vec,Vector<double,3>(),pom_mat,api_gnu);
     id=cub.draw();
-    cout << "Podaj 'n': ";
-    while(cin.get()!='n');
-    cub.move(id,20,30);
-    while(cin.get()!='n');
+    for(;;)
+    {
+        cout << "Podaj kat i odleglosc do przemierzenia: ";
+        cin >> angle >> length;
+        cub.move(id,angle,length);
+        //cout << "Podaj kat zmiany orientacji: ";
+        //cin >> angle;
+        //cub.rotate(id,angle);
+    }
     plik.close();
     return 0;
 }

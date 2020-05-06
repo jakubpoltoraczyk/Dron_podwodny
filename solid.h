@@ -1,22 +1,20 @@
 #ifndef SOLID_H
 #define SOLID_H
 
-#include "gnuplot_object.h"
+#include "drawing_interface.h"
 #include "rotation_matrix.h"
 
-class Solid: public Gnuplot_object
+class Solid: public Drawing_interface
 {
 protected:
+    Rotation_matrix rot_mat;
     Vector<double,3> center_point;
 public:
-    Solid(const Vector<double,3> & p,drawNS::APIGnuPlot3D & g): Gnuplot_object(g)
-    {
-        center_point=p;
-    }
+    Solid(const Vector<double,3> & p, const Matrix<double,3> & m, drawNS::APIGnuPlot3D * g): Drawing_interface(g), rot_mat(m), center_point(p) {}
     virtual ~Solid() {}
     virtual uint draw() = 0; 
-    virtual void move(uint id,double length,double high) = 0;
-    virtual void rotate(const Rotation_matrix & mat) = 0;
+    virtual void move(uint id,double angle,double length) = 0;
+    virtual void rotate(int id, double angle) = 0;
 };
 
 #endif // SOLID_H

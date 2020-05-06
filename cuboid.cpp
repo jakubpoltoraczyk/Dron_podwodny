@@ -1,6 +1,6 @@
 #include "cuboid.h"
 
-Cuboid::Cuboid(const Vector<double,3> * t,const Vector<double,3> & p,drawNS::APIGnuPlot3D & g): Solid(p,g)
+Cuboid::Cuboid(const Vector<double,3> * t,const Vector<double,3> & p, const Matrix<double,3> & m, drawNS::APIGnuPlot3D * g): Solid(p,m,g)
 {
     for(int i=0;i<8;++i)
         tab[i]=t[i];
@@ -10,25 +10,35 @@ uint Cuboid::draw()
 {
     using std::vector;
     uint id;
-    id=gnuplot.draw_polyhedron(vector<vector<drawNS::Point3D>>{{tab[0],tab[1],tab[2],tab[3]},{tab[4],tab[5],tab[6],tab[7]}},"blue");
-    gnuplot.redraw();
+    Cuboid pom(*this);
+    for(int i=0;i<8;++i)
+        pom.tab[i]=center_point+rot_mat*tab[i];
+    id=gnuplot->draw_polyhedron(vector<vector<drawNS::Point3D>>{{pom.tab[0],pom.tab[1],pom.tab[2],pom.tab[3]},{pom.tab[4],pom.tab[5],pom.tab[6],pom.tab[7]}},"blue");
+    gnuplot->redraw();
     return id;
 }
 
-void Cuboid::move(uint id,double length,double high)
+void Cuboid::move(uint id,double angle,double length)
 {
-    double l_counter = 0.0, h_counter = 0.0;
-    for(;l_counter<length||h_counter<high;l_counter+=0.03,h_counter+=0.03)
+    double move_z = sin(angle)*length/500;
+    double move_x = cos(angle)*length/500;
+    for(int counter=0;counter<500;++counter)
     {
-        for(int i=0;i<8;++i)
-        {
-            if(l_counter<length)
-                tab[i][0]+=0.03;
-            if(h_counter<high)
-                tab[i][2]+=0.03;
-        }
-        gnuplot.erase_shape(id);
+        center_point[0]+=move_x;
+        center_point[2]+=move_z;
+        gnuplot->erase_shape(id);
         id=draw();
-        gnuplot.redraw();
+        gnuplot->redraw();
     }
+}
+
+void Cuboid::rotate(int id, double angle)
+{
+    rot_mat[0][0]=cos(angle);
+    rot_mat[1][1]=cos(angle);
+    rot_mat[0][1]=(-1)*sin(angle);
+    rot_mat[1][0]=sin(angle);
+    id=draw();
+    gnuplot->erase_shape(id);
+    gnuplot->redraw();
 }

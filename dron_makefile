@@ -4,14 +4,14 @@ CPPFLAGS = -Wall -pedantic -std=c++17
 
 all: dron clean
 
-dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o
-	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o -lpthread
+dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o
+	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o -lpthread
 
 main.o: main.cpp cuboid.h
 	g++ ${CPPFLAGS} -c main.cpp
 
 used_templates.o: used_templates.cpp
-	g++ ${CPPFLAGS} -c used_templates.cpp vector.cpp
+	g++ ${CPPFLAGS} -c used_templates.cpp vector.cpp matrix.cpp
 
 cuboid.o: cuboid.cpp solid.h
 	g++ ${CPPFLAGS} -c cuboid.cpp 
@@ -19,10 +19,13 @@ cuboid.o: cuboid.cpp solid.h
 Dr3D_gnuplot_api.o: Dr3D_gnuplot_api.cpp Dr3D_gnuplot_api.hh
 	g++ ${CPPFLAGS} -c Dr3D_gnuplot_api.cpp
 
-solid.h: gnuplot_object.h
-	touch gnuplot_object.h
+rotation_matrix.o: rotation_matrix.cpp 
+	g++ ${CPPFLAGS} -c rotation_matrix.cpp
 
-gnuplot_object.h: Dr3D_gnuplot_api.hh
+solid.h: drawing_interface.h rotation_matrix.h
+	touch drawing_interface.h rotation_matrix.h
+
+drawing_interface.h: Dr3D_gnuplot_api.hh
 	touch Dr3D_gnuplot_api.h
 
 Dr3D_gnuplot_api.hh: Draw3D_api_interface.hh
