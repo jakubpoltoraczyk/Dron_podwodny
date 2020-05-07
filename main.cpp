@@ -21,9 +21,9 @@ int main()
         cout << "Podaj kat i odleglosc do przemierzenia: ";
         cin >> angle >> length;
         cub.move(angle,length);
-        //cout << "Podaj kat zmiany orientacji: ";
-        //cin >> angle;
-        //cub.rotate(id,angle);
+        cout << "Podaj kat zmiany orientacji: ";
+        cin >> angle;
+        cub.rotate(angle);
     }
     plik.close();
     return 0;
