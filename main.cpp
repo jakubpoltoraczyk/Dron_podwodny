@@ -1,11 +1,11 @@
 #include "cuboid.h"
+#include "drone.h"
 #include <iostream>
 #include <fstream>
 
 int main()
 {
     using namespace std;
-    double length,angle;
     std::ifstream plik;
     plik.open("plik");
     Vector <double,3> vec[8];
@@ -14,17 +14,17 @@ int main()
         plik >> vec[i];
     plik >> pom_mat; 
     drawNS::APIGnuPlot3D * api_gnu = new drawNS::APIGnuPlot3D(-100,100,-100,100,-100,100,-1);
-    Cuboid cub(vec,Vector<double,3>(),pom_mat,api_gnu);
-    cub.draw();
+    Drone dron01(vec,Vector<double,3>(),pom_mat,api_gnu);
+    dron01.draw();
     for(;;)
     {
-        cout << "Podaj kat i odleglosc do przemierzenia: ";
-        cin >> angle >> length;
-        cub.move(angle,length);
-        cout << "Podaj kat zmiany orientacji: ";
-        cin >> angle;
-        cub.rotate(angle);
+        double a,l;
+        cout << "Podaj kat i dlugosc ruchu: ";
+        cin >> a >> l;
+        dron01.move(a,l);
+        cout << "Podaj kat obrotu: ";
+        cin >> a;
+        dron01.rotate(a);
     }
-    plik.close();
     return 0;
 }

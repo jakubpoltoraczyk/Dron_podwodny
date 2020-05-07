@@ -6,13 +6,11 @@
 
 class Cuboid: public Solid
 {
-private:
+protected:
     Vector<double,3> tab[8];
 public:
     Cuboid(const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, drawNS::APIGnuPlot3D * g);
-    void draw();
-    void move(double angle,double length);
-    void rotate(double angle);
+    void draw() override;
 };
 
 #endif // CUBOID_H
