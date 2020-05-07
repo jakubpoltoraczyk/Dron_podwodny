@@ -20,10 +20,9 @@ void Drone::move(double angle,double length)
 
 void Drone::draw()
 {
+    face_id[0]=gnuplot->draw_line(center_point+rot_mat*tab[1],center_point+rot_mat*tab[6],"blue");
+    face_id[1]=gnuplot->draw_line(center_point+rot_mat*tab[2],center_point+rot_mat*tab[5],"blue");
     Cuboid::draw();
-    face_id[0]=gnuplot->draw_line(center_point+rot_mat*tab[1],center_point+rot_mat*tab[6],"green");
-    face_id[1]=gnuplot->draw_line(center_point+rot_mat*tab[2],center_point+rot_mat*tab[5],"green");
-    gnuplot->redraw();
 }
 
 void Drone::rotate(double angle)
