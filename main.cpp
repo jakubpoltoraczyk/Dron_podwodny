@@ -6,7 +6,7 @@ void menu()
 {
     using std::cout;
     using std::endl;
-    cout << "Menu wyboru opcji drona:" << endl;
+    cout << "\nMenu wyboru opcji drona:" << endl;
     cout << "[e] - wyjscie z programu" << endl;
     cout << "[m] - ruch" << endl;
     cout << "[r] - rotacja" << endl;
