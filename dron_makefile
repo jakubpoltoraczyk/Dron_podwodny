@@ -7,7 +7,7 @@ all: dron clean
 dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o solid.o drone.o
 	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o solid.o drone.o -lpthread
 
-main.o: main.cpp cuboid.h drone.h
+main.o: main.cpp drone.h
 	g++ ${CPPFLAGS} -c main.cpp
 
 drone.o: drone.cpp cuboid.h

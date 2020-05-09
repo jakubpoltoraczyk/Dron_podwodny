@@ -16,6 +16,6 @@ void Solid::rotate(double angle)
 void Solid::replace(const Vector<double,3> & vec)
 {
     gnuplot->erase_shape(id);
-    center_point+=rot_mat*vec;
+    center_point=rot_mat*vec;
     draw();
 }
