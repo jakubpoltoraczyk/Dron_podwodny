@@ -9,9 +9,9 @@ Cuboid::Cuboid(const Vector<double,3> * t,const Vector<double,3> & p, const Matr
 void Cuboid::draw()
 {
     using std::vector;
-    Cuboid pom(*this);
+    Vector <double,3> pom[8];
     for(int i=0;i<8;++i)
-        pom.tab[i]=center_point+rot_mat*tab[i];
-    id=gnuplot->draw_polyhedron(vector<vector<drawNS::Point3D>>{{pom.tab[0],pom.tab[1],pom.tab[2],pom.tab[3]},{pom.tab[4],pom.tab[5],pom.tab[6],pom.tab[7]}},color);
+        pom[i]=center_point+rot_mat*tab[i];
+    id=gnuplot->draw_polyhedron(vector<vector<drawNS::Point3D>>{{pom[0],pom[1],pom[2],pom[3]},{pom[4],pom[5],pom[6],pom[7]}},color);
     gnuplot->redraw();
 }
