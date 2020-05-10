@@ -36,6 +36,8 @@ int main()
         std::cin >> option;
         switch(option)
         {
+            case 'e':
+                std::cout << "Wyjscie z programu" << std::endl; break;
             case 'm':
             std::cout << "Podaj kat spadania/wznoszenia oraz odleglosc: ";
             std::cin >> angle >> length;
