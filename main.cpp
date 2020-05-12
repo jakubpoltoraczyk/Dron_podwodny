@@ -1,4 +1,5 @@
 #include "drone.h"
+#include "hexagonal_prism.h"
 #include <iostream>
 #include <fstream>
 
@@ -17,17 +18,24 @@ void menu()
 int main()
 {
     std::ifstream file_drone;
+    std::ifstream file_boxes;
     file_drone.open("file_drone");
+    file_boxes.open("file_boxes");
     double length,angle;
     std::string color = "blue";
-    Vector<double,3> tab_vec[8];
+    Vector<double,3> tab_vec_8[8];
+    Vector<double,3> tab_vec_12[8];
     Matrix<double,3> mat;
-    drawNS::APIGnuPlot3D * api_gnu = new drawNS::APIGnuPlot3D(-100,100,-100,100,-100,100,-1);
+    std::shared_ptr<drawNS::Draw3DAPI> api_gnu(new drawNS::APIGnuPlot3D(-100,100,-100,100,-100,100,-1));
     for(int i=0;i<8;++i)
-        file_drone >> tab_vec[i];
+        file_drone >> tab_vec_8[i];
     file_drone >> mat;
-    Drone drone(tab_vec,Vector<double,3>(),mat,color,api_gnu);
+    for(int i=0;i<12;++i)
+        file_boxes >> tab_vec_12[i];
+    Drone drone(tab_vec_8,Vector<double,3>(),mat,color,api_gnu);
+    Hexagonal_prism hex(tab_vec_12,Vector<double,3>(),mat,color,api_gnu);
     drone.draw();
+    hex.draw();
     char option;
     do
     {
@@ -48,8 +56,8 @@ int main()
             drone.rotate(angle); break;
             case 'p':
             std::cout << "Podaj nowy punkt srodkowy (x,y,z): ";
-            std::cin >> tab_vec[0];
-            drone.replace(tab_vec[0]); break;
+            std::cin >> tab_vec_8[0];
+            drone.replace(tab_vec_8[0]); break;
             case 'c':
             std::cout << "Podaj nowy kolor drona: ";
             std::cin >> color;

@@ -26,7 +26,11 @@ public:
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Cuboid(const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, drawNS::Draw3DAPI * const g);
+    Cuboid(const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g);
+    /*!
+    * \brief Wirtualny destruktor
+    */
+    virtual ~Cuboid() {}
     /*!
     * \brief Metoda rysujaca prostopadloscian
     */

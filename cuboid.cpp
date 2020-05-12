@@ -1,6 +1,6 @@
 #include "cuboid.h"
 
-Cuboid::Cuboid(const Vector<double,3> * t,const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, drawNS::Draw3DAPI * g): Solid(p,m,c,g)
+Cuboid::Cuboid(const Vector<double,3> * t,const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): Solid(p,m,c,g)
 {
     for(int i=0;i<8;++i)
         tab[i]=t[i];

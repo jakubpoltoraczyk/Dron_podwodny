@@ -25,7 +25,7 @@ public:
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Drone(const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, drawNS::APIGnuPlot3D * g): Cuboid(t,p,m,c,g) {}
+    Drone(const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): Cuboid(t,p,m,c,g) {}
     /*!
     * \brief Metoda poruszajca dronem (animacja)
     * \param angle - kat wznoszenia\opadania drona

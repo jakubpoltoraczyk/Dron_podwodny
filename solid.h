@@ -31,7 +31,7 @@ public:
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Solid(const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, drawNS::Draw3DAPI * const g): Drawing_interface(c,g), rot_mat(m), center_point(p) {}
+    Solid(const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): Drawing_interface(c,g), rot_mat(m), center_point(p) {}
     /*!
     * \brief Destruktor wirtualny
     */

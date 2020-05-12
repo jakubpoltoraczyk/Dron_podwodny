@@ -30,7 +30,7 @@ public:
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Drawing_interface(const std::string & c, drawNS::Draw3DAPI * const g): gnuplot(g), color(c), id(0){}
+    Drawing_interface(const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): gnuplot(g), color(c), id(0){}
     /*!
     * \brief Destruktor wirtualny
     */
