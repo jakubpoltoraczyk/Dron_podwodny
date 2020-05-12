@@ -23,10 +23,6 @@ protected:
     * \brief Punkt srodkowy bryly
     */
     Vector<double,3> center_point;
-    /*! Numer id obecnego rysunku bryly
-    * \brief
-    */
-    double id;
 public:
     /*!
     * \brief Konstruktor
@@ -35,7 +31,7 @@ public:
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Solid(const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, drawNS::Draw3DAPI * const g): Drawing_interface(c,g), rot_mat(m), center_point(p), id(0){}
+    Solid(const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, drawNS::Draw3DAPI * const g): Drawing_interface(c,g), rot_mat(m), center_point(p) {}
     /*!
     * \brief Destruktor wirtualny
     */

@@ -20,13 +20,17 @@ protected:
     * \brief zmienna przechowujaca kolor obecnego obiektu
     */ 
     std::string color;
+    /*! Numer id obecnego rysunku bryly
+    * \brief
+    */
+    double id;
 public:
     /*!
      * \brief Konstruktor
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Drawing_interface(const std::string & c, drawNS::Draw3DAPI * const g): gnuplot(g), color(c){}
+    Drawing_interface(const std::string & c, drawNS::Draw3DAPI * const g): gnuplot(g), color(c), id(0){}
     /*!
     * \brief Destruktor wirtualny
     */
