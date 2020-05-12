@@ -2,6 +2,7 @@
 #define DRONE_H
 
 #include "cuboid.h"
+#include "rotator.h"
 
 /*!
 * \brief Klasa konkretna reprezentujaca drona
@@ -16,6 +17,8 @@ protected:
     * \brief Tablica id dla "glowy" drona
     */
     double face_id[2];
+    Rotator left_rotator, right_rotator;
+
 public:
     /*!
     * \brief Konstruktor
@@ -25,7 +28,8 @@ public:
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Drone(const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): Cuboid(t,p,m,c,g) {}
+    Drone(const Vector<double,3> *r, const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): 
+    Cuboid(t,p,m,c,g), left_rotator(r,p,m,c,g), right_rotator(r,p,m,c,g) {}
     /*!
     * \brief Metoda poruszajca dronem (animacja)
     * \param angle - kat wznoszenia\opadania drona

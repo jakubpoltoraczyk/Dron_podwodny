@@ -2,14 +2,14 @@
 
 void Solid::rotate(double angle)
 {
-    gnuplot->erase_shape(id);
+    erase_object();
     rot_mat.rotate_z(angle);
     draw();
 }
 
 void Solid::replace(const Vector<double,3> & vec)
 {
-    gnuplot->erase_shape(id);
+    erase_object();
     center_point=vec;
     draw();
 }

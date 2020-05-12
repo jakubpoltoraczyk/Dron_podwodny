@@ -6,6 +6,7 @@
 class Rotation_matrix: public Matrix<double,3>
 {
 public:
+     Rotation_matrix();
      explicit Rotation_matrix(const Matrix<double,3> & mat);
      Rotation_matrix operator * (const Rotation_matrix & mat)const {return Rotation_matrix((*this).Matrix::operator*(mat));}
      Vector<double,3> operator * (const Vector<double,3> & v)const {return (*this).Matrix::operator*(v);}

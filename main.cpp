@@ -18,24 +18,20 @@ void menu()
 int main()
 {
     std::ifstream file_drone;
-    std::ifstream file_boxes;
     file_drone.open("file_drone");
-    file_boxes.open("file_boxes");
     double length,angle;
     std::string color = "blue";
     Vector<double,3> tab_vec_8[8];
-    Vector<double,3> tab_vec_12[8];
+    Vector<double,3> tab_vec_12[12];
     Matrix<double,3> mat;
-    std::shared_ptr<drawNS::Draw3DAPI> api_gnu(new drawNS::APIGnuPlot3D(-100,100,-100,100,-100,100,-1));
+    std::shared_ptr<drawNS::Draw3DAPI> api_gnu(new drawNS::APIGnuPlot3D(-80,80,-80,80,-80,80,-1));
+    file_drone >> mat;
     for(int i=0;i<8;++i)
         file_drone >> tab_vec_8[i];
-    file_drone >> mat;
     for(int i=0;i<12;++i)
-        file_boxes >> tab_vec_12[i];
-    Drone drone(tab_vec_8,Vector<double,3>(),mat,color,api_gnu);
-    Hexagonal_prism hex(tab_vec_12,Vector<double,3>(),mat,color,api_gnu);
+        file_drone >> tab_vec_12[i];
+    Drone drone(tab_vec_12,tab_vec_8,Vector<double,3>(),mat,color,api_gnu);
     drone.draw();
-    hex.draw();
     char option;
     do
     {

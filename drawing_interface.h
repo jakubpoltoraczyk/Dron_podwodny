@@ -39,6 +39,7 @@ public:
     * \brief Metoda czysto abstrakcyjna rysujaca obiekt
     */
     virtual void draw() = 0;
+    void erase_object() {gnuplot->erase_shape(id);}
 };
 
 #endif // DRAWING_INTERFACE

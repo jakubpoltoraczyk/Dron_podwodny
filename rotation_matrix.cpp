@@ -1,5 +1,15 @@
 #include "rotation_matrix.h"
 
+Rotation_matrix::Rotation_matrix()
+{
+    for(int i=0;i<3;++i)
+        for(int j=0;j<3;++j)
+            tab[i][j]=0.0;
+    tab[0][0]=1.0;
+    tab[1][1]=1.0;
+    tab[2][2]=1.0;
+}
+
 Rotation_matrix::Rotation_matrix(const Matrix<double,3> & mat): Matrix<double,3>(mat)
 {
     if(std::abs(mat.det()-1)>epsilon||!(mat*mat.transposition()==mat.transposition()*mat))
