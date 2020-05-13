@@ -44,12 +44,12 @@ public:
     * \brief Metoda zmiany miejsca bryly (bez animacji)
     * \param vec - punkt (x,y,z) reprezentujacy nowy srodek bryly
     */
-    void replace(const Vector<double,3> & vec);
+    void replace(const Vector<double,3> & vec) {erase_object(); center_point=vec;}
     /*!
     * \brief Metoda zmieniajaca orientacje bryly
     * \param angle - kat zmiany orientacji
     */
-    void rotate(double angle);
+    void rotate(double angle) {erase_object(); rot_mat.rotate_z(angle);}
 };
 
 #endif // SOLID_H

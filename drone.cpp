@@ -49,6 +49,7 @@ void Drone::rotate(double angle)
     left_rotator.rotate(ang);
     right_rotator.rotate(ang);
     Cuboid::rotate(ang);
+    draw();
     }
 }
 
@@ -59,15 +60,15 @@ void Drone::replace(const Vector<double,3> & v)
     left_rotator.erase_object();
     right_rotator.erase_object();
     Cuboid::replace(v);
+    draw();
 }
 
 void Drone::change_color(const std::string & c)
 {
-    erase_object();
-    left_rotator.erase_object();
-    right_rotator.erase_object();
     gnuplot->erase_shape(face_id[0]);
     gnuplot->erase_shape(face_id[1]);
-    color=c;
+    left_rotator.change_color(c);
+    right_rotator.change_color(c);
+    Cuboid::change_color(c);
     draw();
 }

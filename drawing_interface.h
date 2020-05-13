@@ -40,6 +40,11 @@ public:
     */
     virtual void draw() = 0;
     void erase_object() {gnuplot->erase_shape(id);}
+        /*!
+    * \brief Metoda zmieniajaca kolor rysunku
+    * \param c - nowy kolor rysunku
+    */
+    void change_color(const std::string & c) {erase_object(); color=c;}
 };
 
 #endif // DRAWING_INTERFACE
