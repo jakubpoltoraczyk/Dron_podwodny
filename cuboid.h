@@ -4,12 +4,7 @@
 #include "solid.h"
 #include <cmath>
 
-/*!
-* \brief Klasa konkretna reprezentujaca prostopadloscian
-*
-* Klasa umozliwa rysunek, przemieszczenie oraz obrot dowolnego prostopadloscianu
-*
-*/
+
 class Cuboid: public Solid
 {
 protected:

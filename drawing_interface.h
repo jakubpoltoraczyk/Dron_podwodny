@@ -39,8 +39,11 @@ public:
     * \brief Metoda czysto abstrakcyjna rysujaca obiekt
     */
     virtual void draw() = 0;
+    /*!
+    * \brief Metoda usuwajaca obecny rysunek 
+    */
     void erase_object() {gnuplot->erase_shape(id);}
-        /*!
+    /*!
     * \brief Metoda zmieniajaca kolor rysunku
     * \param c - nowy kolor rysunku
     */
