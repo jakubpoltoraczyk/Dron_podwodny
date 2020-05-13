@@ -46,6 +46,8 @@ void Drone::rotate(double angle)
     gnuplot->erase_shape(face_id[1]);
     left_rotator.turn(rotator_angle);
     right_rotator.turn(rotator_angle);
+    left_rotator.rotate(ang);
+    right_rotator.rotate(ang);
     Cuboid::rotate(ang);
     }
 }
