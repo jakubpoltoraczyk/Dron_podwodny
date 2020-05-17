@@ -4,7 +4,8 @@ void Drone::move(double angle,double length)
 {
     double rad = M_PI * angle / 180;
     double divisor = std::abs(100 * length);
-    double rotator_angle = 360/divisor;
+    int speed = length/10;
+    double rotator_angle = 3*speed*360/divisor;
     double move[3];
     move[0] = cos(rad)*length/divisor;
     move[1] = 0.0;
@@ -28,8 +29,8 @@ void Drone::draw()
 {
     face_id[0]=gnuplot->draw_line(center_point+rot_mat*tab[1],center_point+rot_mat*tab[6],color);
     face_id[1]=gnuplot->draw_line(center_point+rot_mat*tab[2],center_point+rot_mat*tab[5],color);
-    left_rotator.draw(center_point+rot_mat*((tab[0]+tab[4])*0.5));
-    right_rotator.draw(center_point+rot_mat*((tab[3]+tab[7])*0.5));
+    left_rotator.draw((center_point+rot_mat*((tab[0]+tab[4])*0.5)));
+    right_rotator.draw((center_point+rot_mat*((tab[3]+tab[7])*0.5)));
     Cuboid::draw();
 }
 
@@ -37,7 +38,8 @@ void Drone::rotate(double angle)
 {
     double divisor = std::abs(20 * angle);
     double ang = angle/divisor;
-    double rotator_angle = 360/divisor;
+    int speed = angle/10;
+    double rotator_angle = speed*360/divisor;
     for(int i=0;i<divisor;++i)
     {
     left_rotator.erase_object();
