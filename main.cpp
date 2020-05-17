@@ -32,8 +32,8 @@ int main()
     for(int i=0;i<12;++i)
         file_drone >> tab_vec_12[i];
     Drone drone(tab_vec_12,tab_vec_8,Vector<double,3>(),mat,color,api_gnu);
-    Bed bed(-70,70,-70,70,-60,color,api_gnu);
-    Water water(10,-70,70,-70,70,60,color,api_gnu);
+    Bed bed(-70,70,-70,70,-60,"black",api_gnu);
+    Water water(5,-70,70,-70,70,60,color,api_gnu);
     bed.draw();
     water.draw();
     drone.draw();

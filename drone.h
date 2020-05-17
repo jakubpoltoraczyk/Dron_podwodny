@@ -22,6 +22,7 @@ protected:
 public:
     /*!
     * \brief Konstruktor
+    * \param r - tablica dwunastu wektorow 3-wymiarowych (wierzcholkow)
     * \param t - tablica osmiu wektorow 3-wymiarowych (wierzcholkow)
     * \param p - punkt (x,y,z) do przypisania dla srodka bryly
     * \param m - macierz 3-wymiarowa, stanowiaca orientacje bryly
