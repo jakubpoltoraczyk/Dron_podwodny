@@ -85,7 +85,7 @@ int main()
             case 'r':
             std::cout << "Podaj kat obrotu: ";
             std::cin >> angle;
-            divisor=std::abs(angle*20);
+            divisor=std::abs(angle*15);
             for(int i=0;i<divisor;++i)
             {
                 drone.rotate(angle/divisor);
