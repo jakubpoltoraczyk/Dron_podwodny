@@ -3,7 +3,7 @@
 Drone:: Drone(const Vector<double,3> *r, const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g):
 Cuboid(t,p,m,c,g), left_rotator(r,p,m,c,g), right_rotator(r,p,m,c,g)
 {
-    ray=(tab[0]-tab[3]).length()*0.5+(r[0]+center_point).length();
+    ray=(tab[0]-tab[3]).length()*0.5+(r[0]-r[3]).length();
 } 
 
 void Drone::move(double angle,double length)
