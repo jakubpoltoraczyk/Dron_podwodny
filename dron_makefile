@@ -4,13 +4,13 @@ CPPFLAGS = -Wall -pedantic -std=c++17
 
 all: dron clean
 
-dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o
-	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o -lpthread
+dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o
+	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o -lpthread
 
 main.o: main.cpp drone.h
 	g++ ${CPPFLAGS} -c main.cpp
 
-drone.o: drone.cpp cuboid.h hexagonal_prism.h
+drone.o: drone.cpp cuboid.h rotator.h drone_interface.h
 	g++ ${CPPFLAGS} -c drone.cpp
 
 used_templates.o: used_templates.cpp
@@ -33,6 +33,12 @@ hexagonal_prism.o: hexagonal_prism.cpp solid.h
 
 rotator.o: rotator.cpp hexagonal_prism.h
 	g++ ${CPPFLAGS} -c rotator.cpp
+
+cuboid_obsctacle.o: cuboid.h obsctale.h
+	g++ ${CPPFLAGS} -c cuboid_obsctacle.cpp
+
+obsctale.h: drone_interface.h
+	touch drone_interface.h
 
 bed.o: bed.cpp surface.h
 	g++ ${CPPFLAGS} -c bed.cpp 

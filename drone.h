@@ -3,6 +3,7 @@
 
 #include "cuboid.h"
 #include "rotator.h"
+#include "drone_interface.h"
 
 /*!
 * \brief Klasa konkretna reprezentujaca drona
@@ -10,9 +11,10 @@
 * Dron jest traktowany jako prostopadloscian majacy dodatkowe elementy
 *
 */
-class Drone: public Cuboid
+class Drone: public Drone_interface, Cuboid
 {
 protected:
+    double ray;
     /*! 
     * \brief Tablica id dla "glowy" drona
     */
@@ -29,21 +31,20 @@ public:
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Drone(const Vector<double,3> *r, const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): 
-    Cuboid(t,p,m,c,g), left_rotator(r,p,m,c,g), right_rotator(r,p,m,c,g) {}
+    Drone(const Vector<double,3> *r, const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g);
     /*!
     * \brief Metoda poruszajca dronem (animacja)
     * \param angle - kat wznoszenia\opadania drona
     * \param length - dlugosc drogi, na ktora ma sie przemiescic
     */
-    void move(double angle, double length);
+    void move(double angle, double length)override;
     /*!
     * \brief Metoda rysujaca drona
     * 
     * Zakrywa ona metode Cuboid::draw(), z ktorej jednak sama w srodku korzysta w celu dorysowania "glowy" drona
     * 
     */
-    void draw();
+    void draw()override;
     /*!
     * \brief Metoda zmiany miejsca drona (bez animacji)
     * 
@@ -51,7 +52,7 @@ public:
     * 
     * \param vec - punkt (x,y,z) reprezentujacy nowy srodek bryly
     */
-    void replace(const Vector<double,3> & vec);
+    void replace(const Vector<double,3> & vec)override;
     /*!
     * \brief Metoda zmieniajaca orientacje drona
     * 
@@ -59,12 +60,15 @@ public:
     * 
     * \param angle - kat zmiany orientacji
     */
-    void rotate(double angle);
+    void rotate(double angle)override;
     /*!
     * \brief Metoda zmieniajaca kolor drona
     * \param c - nowy kolor drona
     */
-    void change_color(const std::string & c);
+    void change_color(const std::string & c)override;
+    void erase_object()override;
+    Vector<double,3> get_center_point()const{return center_point;}
+    double get_ray()const {return ray;}
 };
 
 #endif // DRONE_H

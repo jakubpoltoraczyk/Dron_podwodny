@@ -28,3 +28,14 @@ void Bed::draw()
         {vec[10][0],vec[10][1],vec[10][2],vec[10][3],vec[10][4],vec[10][5],vec[10][6],vec[10][7],vec[10][8],vec[10][9],vec[10][10]},
     },color);
 }
+
+bool Bed::is_collision(const Drone_interface & drone)
+{
+    if(std::abs(dim[0][2]-drone.get_center_point()[2])<drone.get_ray())
+    {
+        std::cout << "Ruch wstrzymany - kolizja z dnem\n";
+        return true;
+    }
+    else
+        return false;
+}

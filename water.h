@@ -2,6 +2,7 @@
 #define WATER_H
 
 #include "surface.h"
+#include "obstacle.h"
 
 /*!
 * \brief Klasa reprezentujaca powierzchnie wody morskiej
@@ -9,7 +10,7 @@
 * Umożliwia ona narysowanie powierzchni wody morskiej w dowolnej przestrzeni R^3
 *
 */
-class Water: public Surface
+class Water: public Surface, Obstacle
 {
 protected:
     /*!
@@ -37,6 +38,7 @@ public:
     * \brief Metoda rysujaca powierzchnie wody morskiej
     */
     void draw()override;
+    bool is_collision(const Drone_interface & drone)override;
 };
 
 #endif // WATER_H

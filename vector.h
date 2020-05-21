@@ -23,6 +23,7 @@ public:
     T operator * (const Vector & v)const; // metoda mnozaca ze soba dwa wektory
     Vector operator * (const T & n)const; // metoda mnozaca wektor przez wartosc typu double
     bool operator==(const Vector & v)const;
+    double length() const {return sqrt(*this**this);} // metoda zwracajaca dlugosc wektora
     operator drawNS::Point3D()const {return drawNS::Point3D(data[0],data[1],data[2]);}
 };
 

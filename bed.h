@@ -2,6 +2,7 @@
 #define BED_H
 
 #include "surface.h"
+#include "obstacle.h"
 
 /*!
 * \brief Klasa reprezentujaca dno morskie
@@ -9,7 +10,7 @@
 * Umożliwia ona narysowanie dna morskiego w dowolnej przestrzeni R^3
 *
 */
-class Bed: public Surface
+class Bed: public Surface, Obstacle 
 {
 public:
     /*!
@@ -27,6 +28,7 @@ public:
     * \brief Metoda rysujaca dno morskie
     */
     void draw()override;
+    bool is_collision(const Drone_interface & drone)override;
 };
 
 #endif // BED_H
