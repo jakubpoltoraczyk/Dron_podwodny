@@ -10,10 +10,10 @@ void menu()
     using std::cout;
     using std::endl;
     cout << "\nMenu wyboru opcji drona:" << endl;
+    cout << "[-1] - wyjscie z programu" << endl;
     cout << "[0] - dron czerwony" << endl;
     cout << "[1] - dron fioletowy" << endl;
     cout << "[2] - dron zielony" << endl;
-    cout << "[e] - wyjscie z programu" << endl;
     cout << "[d] - usuniecie drona" << endl;
     cout << "[m] - ruch" << endl;
     cout << "[r] - rotacja" << endl;
@@ -83,8 +83,6 @@ int main()
             std::cin >> option;
             switch(option)
             {
-                case 'e':
-                std::cout << "Wyjscie z programu" << std::endl; break;
                 case 'm':
                 std::cout << "Podaj kat spadania/wznoszenia oraz odleglosc: ";
                 std::cin >> angle >> length;
@@ -128,8 +126,9 @@ int main()
             }
         }
         else
-        std::cout << "Blad wyboru drona\n";
-    }while(option!='e');
+            if(n!=-1)
+                std::cout << "Blad wyboru drona\n";
+    }while(n!=-1);
     return 0;
 }
 
