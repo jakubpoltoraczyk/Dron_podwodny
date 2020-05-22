@@ -109,3 +109,28 @@ int main()
     }while(option!='e');
     return 0;
 }
+
+/*int main()
+{
+    std::ifstream file_drone;
+    file_drone.open("file_drone");
+    double length,angle,divisor;
+    std::string color;
+    Vector<double,3> tab_vec_8[8];
+    Vector<double,3> tab_vec_12[12];
+    Vector <double,3> new_point, last_point;
+    Matrix<double,3> mat;
+    std::shared_ptr<drawNS::Draw3DAPI> api_gnu = std::make_shared<drawNS::APIGnuPlot3D>(-120,120,-120,120,-120,120,-1);
+    file_drone >> mat;
+    for(int i=0;i<8;++i)
+        file_drone >> tab_vec_8[i];
+    for(int i=0;i<12;++i)
+        file_drone >> tab_vec_12[i];
+    Drone drone(tab_vec_12,tab_vec_8,Vector<double,3>(),mat,"red",api_gnu);
+    std::vector<std::shared_ptr<Obstacle>> obs = 
+    {
+        std::make_shared<Water>(10,-110,110,-110,110,100,"blue",api_gnu),
+        std::make_shared<Bed>(-110,110,-110,110,-100,"black",api_gnu)
+    };
+    return 0;
+}*/
