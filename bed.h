@@ -28,7 +28,7 @@ public:
     * \brief Metoda rysujaca dno morskie
     */
     void draw()override;
-    bool is_collision(const Drone_interface & drone)override;
+    bool is_collision(const Drone_interface & drone)const override;
 };
 
 #endif // BED_H

@@ -29,7 +29,7 @@ void Bed::draw()
     },color);
 }
 
-bool Bed::is_collision(const Drone_interface & drone)
+bool Bed::is_collision(const Drone_interface & drone)const
 {
     if(std::abs(dim[0][2]-drone.get_center_point()[2])<drone.get_ray())
     {

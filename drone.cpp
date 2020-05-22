@@ -3,7 +3,7 @@
 Drone:: Drone(const Vector<double,3> *r, const Vector<double,3> * t, const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g):
 Cuboid(t,p,m,c,g), left_rotator(r,p,m,c,g), right_rotator(r,p,m,c,g)
 {
-    ray=(tab[0]-tab[3]).length()*0.5+(r[0]-r[3]).length();
+    ray=(center_point-((tab[0]+tab[4])*0.5)).length()+(r[0]-r[3]).length()*0.5;
 } 
 
 void Drone::move(double angle,double length)
@@ -74,4 +74,17 @@ void Drone::erase_object()
     right_rotator.erase_object();
     Cuboid::erase_object();
     gnuplot->redraw();
+}
+
+bool Drone::is_collision(const Drone_interface & drone)const 
+{
+    if(id!=drone.get_id())
+    {
+        if((center_point-drone.get_center_point()).length()<ray+drone.get_ray())
+        {
+            std::cout << "Ruch wstrzymany - kolizja z dronem\n";
+            return true;
+        }
+    }
+    return false;
 }

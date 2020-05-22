@@ -32,7 +32,7 @@ void Water::draw()
     },color);
 }
 
-bool Water::is_collision(const Drone_interface & drone)
+bool Water::is_collision(const Drone_interface & drone)const
 {
     if(drone.get_center_point()[2]>dim[0][2])
     {

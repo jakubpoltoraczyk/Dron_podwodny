@@ -4,6 +4,7 @@
 #include "cuboid.h"
 #include "rotator.h"
 #include "drone_interface.h"
+#include "obstacle.h"
 
 /*!
 * \brief Klasa konkretna reprezentujaca drona
@@ -11,7 +12,7 @@
 * Dron jest traktowany jako prostopadloscian majacy dodatkowe elementy
 *
 */
-class Drone: public Drone_interface, Cuboid
+class Drone: public Drone_interface, Cuboid, Obstacle
 {
 protected:
     double ray;
@@ -37,6 +38,9 @@ public:
     * \param angle - kat wznoszenia\opadania drona
     * \param length - dlugosc drogi, na ktora ma sie przemiescic
     */
+    Vector<double,3> get_center_point()const override{return center_point;}
+    double get_ray()const override {return ray;}
+    double get_id()const override {return Cuboid::get_id();}
     void move(double angle, double length)override;
     /*!
     * \brief Metoda rysujaca drona
@@ -44,7 +48,7 @@ public:
     * Zakrywa ona metode Cuboid::draw(), z ktorej jednak sama w srodku korzysta w celu dorysowania "glowy" drona
     * 
     */
-    void draw()override;
+    void draw();
     /*!
     * \brief Metoda zmiany miejsca drona (bez animacji)
     * 
@@ -52,7 +56,7 @@ public:
     * 
     * \param vec - punkt (x,y,z) reprezentujacy nowy srodek bryly
     */
-    void replace(const Vector<double,3> & vec)override;
+    void replace(const Vector<double,3> & vec);
     /*!
     * \brief Metoda zmieniajaca orientacje drona
     * 
@@ -60,15 +64,14 @@ public:
     * 
     * \param angle - kat zmiany orientacji
     */
-    void rotate(double angle)override;
+    void rotate(double angle);
     /*!
     * \brief Metoda zmieniajaca kolor drona
     * \param c - nowy kolor drona
     */
-    void change_color(const std::string & c)override;
-    void erase_object()override;
-    Vector<double,3> get_center_point()const{return center_point;}
-    double get_ray()const {return ray;}
+    void change_color(const std::string & c);
+    void erase_object();
+    bool is_collision(const Drone_interface & drone)const override;
 };
 
 #endif // DRONE_H

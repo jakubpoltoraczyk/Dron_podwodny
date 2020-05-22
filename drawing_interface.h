@@ -48,6 +48,7 @@ public:
     * \param c - nowy kolor rysunku
     */
     void change_color(const std::string & c) {erase_object(); color=c;}
+    double get_id()const {return id;}
 };
 
 #endif // DRAWING_INTERFACE

@@ -7,7 +7,7 @@ class Obstacle
 {
 public:
     virtual ~Obstacle() {}
-    virtual bool is_collision(const Drone_interface & drone) = 0;
+    virtual bool is_collision(const Drone_interface & drone)const = 0;
 };
 
 #endif //OBSTACLE_H

@@ -84,7 +84,7 @@ int main()
             switch(option)
             {
                 case 'e':
-                    std::cout << "Wyjscie z programu" << std::endl; break;
+                std::cout << "Wyjscie z programu" << std::endl; break;
                 case 'm':
                 std::cout << "Podaj kat spadania/wznoszenia oraz odleglosc: ";
                 std::cin >> angle >> length;
@@ -92,7 +92,8 @@ int main()
                 for(int i=0;i<divisor;++i)
                 {   
                     drone[n].move(angle,length/divisor);
-                    if(water.is_collision(drone[n])||bed.is_collision(drone[n])||cub1.is_collision(drone[n])||cub2.is_collision(drone[n])||cub3.is_collision(drone[n]))
+                    if(i==divisor||water.is_collision(drone[n])||bed.is_collision(drone[n])||cub1.is_collision(drone[n])||cub2.is_collision(drone[n])||cub3.is_collision(drone[n])||
+                    drone[n].is_collision(drone[0])||drone[n].is_collision(drone[1])||drone[n].is_collision(drone[2]))
                     {
                         i=divisor;
                         drone[n].move(angle,-length/divisor);
@@ -107,7 +108,8 @@ int main()
                 for(int i=0;i<divisor;++i)
                 {
                     drone[n].rotate(angle/divisor);
-                    if(cub1.is_collision(drone[n])||cub2.is_collision(drone[n])||cub3.is_collision(drone[n]))
+                    if(cub1.is_collision(drone[n])||cub2.is_collision(drone[n])||cub3.is_collision(drone[n])||
+                    drone[n].is_collision(drone[0])||drone[n].is_collision(drone[1])||drone[n].is_collision(drone[2]))
                     {
                         i=divisor;
                         drone[n].rotate(-angle/divisor);

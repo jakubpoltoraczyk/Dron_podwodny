@@ -38,7 +38,7 @@ public:
     * \brief Metoda rysujaca powierzchnie wody morskiej
     */
     void draw()override;
-    bool is_collision(const Drone_interface & drone)override;
+    bool is_collision(const Drone_interface & drone)const override;
 };
 
 #endif // WATER_H

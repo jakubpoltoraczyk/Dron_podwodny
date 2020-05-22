@@ -1,6 +1,6 @@
 #include "cuboid_obstacle.h"
 
-bool Cuboid_obstacle::is_collision(const Drone_interface & drone)
+bool Cuboid_obstacle::is_collision(const Drone_interface & drone)const
 {
     double ray = drone.get_ray();
     Vector<double,3> pom[8];
