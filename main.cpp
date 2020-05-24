@@ -66,6 +66,9 @@ int main()
         obs.push_back(cub[i]);
     for(int i=0;i<3;++i)
         obs.push_back(drone[i]);
+    /******************************************/
+    /********KONIEC INICJALIZACJI SCENY********/
+    /******************************************/
     Scene scene(drone,obs);
     scene.draw();
     int number,length,angle;
