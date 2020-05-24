@@ -2,6 +2,7 @@
 #include "bed.h"
 #include "water.h"
 #include "cuboid_obstacle.h"
+#include "scene.h"
 #include <iostream>
 #include <fstream>
 
@@ -22,137 +23,86 @@ void menu()
 
 int main()
 {
+    using SCENE::Scene;
     std::ifstream file_drone;
     file_drone.open("file_drone");
-    double length,angle,divisor;
-    std::string color;
-    Vector<double,3> tab_vec_8[8];
+    Vector<double,3> tab_vec_8[4][8];
     Vector<double,3> tab_vec_12[12];
-    Vector <double,3> new_point, last_point;
+    Vector <double,3> new_point[5];
     Matrix<double,3> mat;
     std::shared_ptr<drawNS::Draw3DAPI> api_gnu = std::make_shared<drawNS::APIGnuPlot3D>(-120,120,-120,120,-120,120,-1);
     file_drone >> mat;
     for(int i=0;i<8;++i)
-        file_drone >> tab_vec_8[i];
+        file_drone >> tab_vec_8[0][i];
     for(int i=0;i<12;++i)
         file_drone >> tab_vec_12[i];
-    Drone drone[3] = 
+    for(int i=1;i<4;++i)
+        for(int j=0;j<8;++j)
+            file_drone >> tab_vec_8[i][j];
+    for(int i=0;i<5;++i)
+        file_drone >> new_point[i];
+    std::vector<std::shared_ptr<Drone>> drone
     {
-        Drone(tab_vec_12,tab_vec_8,Vector<double,3>(),mat,"red",api_gnu),
-        Drone(tab_vec_12,tab_vec_8,Vector<double,3>(),mat,"purple",api_gnu),
-        Drone(tab_vec_12,tab_vec_8,Vector<double,3>(),mat,"green",api_gnu)
+        std::make_shared<Drone>(tab_vec_12,tab_vec_8[0],Vector<double,3>(),mat,"red",api_gnu),
+        std::make_shared<Drone>(tab_vec_12,tab_vec_8[0],Vector<double,3>(),mat,"purple",api_gnu),
+        std::make_shared<Drone>(tab_vec_12,tab_vec_8[0],Vector<double,3>(),mat,"green",api_gnu)
     };
-    Bed bed(-110,110,-110,110,-100,"black",api_gnu);
-    Water water(10,-110,110,-110,110,100,"blue",api_gnu);
-    for(int i=0;i<8;++i)
-        file_drone >> tab_vec_8[i];
-    Cuboid_obstacle cub1(tab_vec_8,Vector<double,3>(),mat,"yellow",api_gnu);
-    for(int i=0;i<8;++i)
-        file_drone >> tab_vec_8[i];
-    Cuboid_obstacle cub2(tab_vec_8,Vector<double,3>(),mat,"yellow",api_gnu);
-    for(int i=0;i<8;++i)
-        file_drone >> tab_vec_8[i];
-    Cuboid_obstacle cub3(tab_vec_8,Vector<double,3>(),mat,"yellow",api_gnu);
-    file_drone >> new_point;
-    drone[1].replace(new_point);
-    file_drone >> new_point;
-    drone[2].replace(new_point);
-    file_drone >> new_point;
-    cub1.replace(new_point);
-    file_drone >> new_point;
-    cub2.replace(new_point);
-    file_drone >> new_point;
-    cub3.replace(new_point);
+    for(int i=1;i<3;++i)
+        drone[i]->replace(new_point[i-1]);
+    std::vector<std::shared_ptr<Cuboid_obstacle>> cub
+    {
+        std::make_shared<Cuboid_obstacle>(tab_vec_8[1],Vector<double,3>(),mat,"yellow",api_gnu),
+        std::make_shared<Cuboid_obstacle>(tab_vec_8[2],Vector<double,3>(),mat,"yellow",api_gnu),
+        std::make_shared<Cuboid_obstacle>(tab_vec_8[3],Vector<double,3>(),mat,"yellow",api_gnu)
+    };
     for(int i=0;i<3;++i)
-        drone[i].draw();
-    bed.draw();
-    water.draw();
-    cub1.draw();
-    cub2.draw();
-    cub3.draw();
+        cub[i]->replace(new_point[i+2]);
+    std::vector<std::shared_ptr<Obstacle>> obs
+    {
+        std::make_shared<Bed>(-110,110,-110,110,-100,"black",api_gnu),
+        std::make_shared<Water>(10,-110,110,-110,110,100,"blue",api_gnu),
+    };
+    for(int i=0;i<3;++i)
+        obs.push_back(cub[i]);
+    for(int i=0;i<3;++i)
+        obs.push_back(drone[i]);
+    Scene scene(drone,obs);
+    scene.draw();
+    int number,length,angle;
+    std::string color;
     char option;
-    int n;
     do
     {
         menu();
         std::cout << "Podaj numer drona: ";
-        std::cin >> n;
-        if(n>=0&&n<=2)
+        std::cin >> number;
+        if(number>-1&&number<3)
         {
-            std::cout << "Podaj swoj wybor: ";
+            std::cout << "Podaj wybor opcji: ";
             std::cin >> option;
             switch(option)
             {
                 case 'm':
-                std::cout << "Podaj kat spadania/wznoszenia oraz odleglosc: ";
-                std::cin >> angle >> length;
-                divisor=std::abs(length*20);
-                for(int i=0;i<divisor;++i)
-                {   
-                    drone[n].move(angle,length/divisor);
-                    if(i==divisor||water.is_collision(drone[n])||bed.is_collision(drone[n])||cub1.is_collision(drone[n])||cub2.is_collision(drone[n])||cub3.is_collision(drone[n])||
-                    drone[n].is_collision(drone[0])||drone[n].is_collision(drone[1])||drone[n].is_collision(drone[2]))
-                    {
-                        i=divisor;
-                        drone[n].move(angle,-length/divisor);
-                    }
-                    drone[n].draw();
-                } 
-                break;
+                    std::cout << "Podaj kat wznoszenia/opadania oraz dlugosc drogi: ";
+                    std::cin >> angle >> length;
+                    scene.drone_move(length,angle,number); break;
                 case 'r':
-                std::cout << "Podaj kat obrotu: ";
-                std::cin >> angle;
-                divisor=std::abs(angle*15);
-                for(int i=0;i<divisor;++i)
-                {
-                    drone[n].rotate(angle/divisor);
-                    if(cub1.is_collision(drone[n])||cub2.is_collision(drone[n])||cub3.is_collision(drone[n])||
-                    drone[n].is_collision(drone[0])||drone[n].is_collision(drone[1])||drone[n].is_collision(drone[2]))
-                    {
-                        i=divisor;
-                        drone[n].rotate(-angle/divisor);
-                    }
-                    drone[n].draw();
-                }
-                break;
+                    std::cout << "Podaj kat obrotu: ";
+                    std::cin >> angle;
+                    scene.drone_rotate(angle,number); break;
                 case 'c':
-                std::cout << "Podaj nowy kolor drona: ";
-                std::cin >> color;
-                drone[n].change_color(color); break;
+                    std::cout << "Podaj nowy kolor drona: ";
+                    std::cin >> color;
+                    scene.drone_change_color(color,number); break;
                 case 'd':
-                drone[n].erase_object(); break;
+                    scene.drone_delete(number); break;
                 default:
-                std::cerr << "Blad wyboru opcji\n";
+                    std::cout << "Brak opcji o podanym znaku\n";
             }
         }
-        else
-            if(n!=-1)
-                std::cout << "Blad wyboru drona\n";
-    }while(n!=-1);
+        else if(number!=-1)
+            std::cout << "Brak drona o podanym numerze\n";
+    }while(number!=-1);
+    file_drone.close();
     return 0;
 }
-
-/*int main()
-{
-    std::ifstream file_drone;
-    file_drone.open("file_drone");
-    double length,angle,divisor;
-    std::string color;
-    Vector<double,3> tab_vec_8[8];
-    Vector<double,3> tab_vec_12[12];
-    Vector <double,3> new_point, last_point;
-    Matrix<double,3> mat;
-    std::shared_ptr<drawNS::Draw3DAPI> api_gnu = std::make_shared<drawNS::APIGnuPlot3D>(-120,120,-120,120,-120,120,-1);
-    file_drone >> mat;
-    for(int i=0;i<8;++i)
-        file_drone >> tab_vec_8[i];
-    for(int i=0;i<12;++i)
-        file_drone >> tab_vec_12[i];
-    Drone drone(tab_vec_12,tab_vec_8,Vector<double,3>(),mat,"red",api_gnu);
-    std::vector<std::shared_ptr<Obstacle>> obs = 
-    {
-        std::make_shared<Water>(10,-110,110,-110,110,100,"blue",api_gnu),
-        std::make_shared<Bed>(-110,110,-110,110,-100,"black",api_gnu)
-    };
-    return 0;
-}*/

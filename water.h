@@ -10,7 +10,7 @@
 * Umożliwia ona narysowanie powierzchni wody morskiej w dowolnej przestrzeni R^3
 *
 */
-class Water: public Surface, Obstacle
+class Water: public Surface, public Obstacle
 {
 protected:
     /*!

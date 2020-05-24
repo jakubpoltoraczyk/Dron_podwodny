@@ -12,7 +12,7 @@
 * Dron jest traktowany jako prostopadloscian majacy dodatkowe elementy
 *
 */
-class Drone: public Drone_interface, Cuboid, Obstacle
+class Drone: public Drone_interface, public Cuboid, public Obstacle
 {
 protected:
     double ray;

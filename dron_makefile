@@ -4,11 +4,14 @@ CPPFLAGS = -Wall -pedantic -std=c++17
 
 all: dron clean
 
-dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o
-	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o -lpthread
+dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o scene.o
+	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o scene.o -lpthread
 
-main.o: main.cpp drone.h
+main.o: main.cpp scene.h
 	g++ ${CPPFLAGS} -c main.cpp
+
+scene.o: scene.cpp drone.h cuboid_obstacle.h water.h bed.h
+	g++ ${CPPFLAGS} -c scene.cpp 
 
 drone.o: drone.cpp cuboid.h rotator.h drone_interface.h
 	g++ ${CPPFLAGS} -c drone.cpp

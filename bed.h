@@ -10,7 +10,7 @@
 * Umożliwia ona narysowanie dna morskiego w dowolnej przestrzeni R^3
 *
 */
-class Bed: public Surface, Obstacle 
+class Bed: public Surface, public Obstacle 
 {
 public:
     /*!
