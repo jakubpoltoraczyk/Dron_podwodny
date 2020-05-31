@@ -11,14 +11,22 @@ void menu()
     using std::cout;
     using std::endl;
     cout << "\nMenu wyboru opcji drona:" << endl;
-    cout << "[-1] - wyjscie z programu" << endl;
-    cout << "[0] - dron czerwony" << endl;
-    cout << "[1] - dron fioletowy" << endl;
-    cout << "[2] - dron zielony" << endl;
+    cout << "[q] - zmien drona" << endl;
     cout << "[d] - usuniecie drona" << endl;
     cout << "[m] - ruch" << endl;
     cout << "[r] - rotacja" << endl;
     cout << "[c] - zmiana koloru" << endl;
+}
+
+void main_menu()
+{
+    using std::cout;
+    using std::endl;
+    cout << "\nMenu glowne:" << endl;
+    cout << "[-1] - wyjscie z programu" << endl;
+    cout << "[0] - dron czerwony" << endl;
+    cout << "[1] - dron fioletowy" << endl;
+    cout << "[2] - dron zielony" << endl;
 }
 
 int main()
@@ -73,14 +81,18 @@ int main()
     scene.draw();
     int number,length,angle;
     std::string color;
-    char option;
+    char option = 'q';
     do
     {
-        menu();
-        std::cout << "Podaj numer drona: ";
-        std::cin >> number;
+	if(option=='q')
+	{
+            main_menu();
+            std::cout << "Podaj numer drona: ";
+            std::cin >> number;
+	}
         if(number>-1&&number<3)
         {
+	    menu();
             std::cout << "Podaj wybor opcji: ";
             std::cin >> option;
             switch(option)
@@ -99,6 +111,8 @@ int main()
                     scene.drone_change_color(color,number); break;
                 case 'd':
                     scene.drone_delete(number); break;
+		case 'q':
+		    std::cout << "\nPowrot do menu glownego\n"; break;
                 default:
                     std::cout << "Brak opcji o podanym znaku\n";
             }

@@ -38,6 +38,9 @@ public:
     * \brief Metoda rysujaca powierzchnie wody morskiej
     */
     void draw()override;
+    /*!
+    * \brief Metoda sprawdzajaca kolizje drona z powierzchnia wody
+    */
     bool is_collision(const Drone_interface & drone)const override;
 };
 

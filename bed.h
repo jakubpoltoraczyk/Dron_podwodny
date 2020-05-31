@@ -28,6 +28,9 @@ public:
     * \brief Metoda rysujaca dno morskie
     */
     void draw()override;
+    /*!
+    * \brief Metoda sprawdzajaca kolizje drona z dnem
+    */
     bool is_collision(const Drone_interface & drone)const override;
 };
 

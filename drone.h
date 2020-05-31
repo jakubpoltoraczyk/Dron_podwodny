@@ -38,9 +38,23 @@ public:
     * \param angle - kat wznoszenia\opadania drona
     * \param length - dlugosc drogi, na ktora ma sie przemiescic
     */
+    /*! 
+    * \brief Metoda zwracajaca srodek drona
+    */
     Vector<double,3> get_center_point()const override{return center_point;}
+    /*!
+    * \brief Metoda zwracajaca promien kolizji drona
+    */
     double get_ray()const override {return ray;}
+    /*! 
+    * \brief Metoda zwracajaca id drona
+    */
     double get_id()const override {return Cuboid::get_id();}
+    /*!
+    * \brief Metoda poruszajca dronem (animacja)
+    * \param angle - kat wznoszenia\opadania drona
+    * \param length - dlugosc drogi, na ktora ma sie przemiescic
+    */
     void move(double angle, double length)override;
     /*!
     * \brief Metoda rysujaca drona
@@ -70,7 +84,14 @@ public:
     * \param c - nowy kolor drona
     */
     void change_color(const std::string & c);
+    /*!
+    * \brief Metoda usuwajaca drona
+    */ 
     void erase_object();
+    /*!
+    * \brief Metoda sprawdzajaca kolizje drona z dronem
+    * \param drone - referencja do interfejsu drona
+    */
     bool is_collision(const Drone_interface & drone)const override;
 };
 
