@@ -10,6 +10,7 @@ namespace SCENE
 {
     using std::vector;
     using std::shared_ptr;
+    typedef unsigned int uint;
     /*!
     * \brief Klasa konretna reprezentujaca scene kolizyjna z dronem
     *

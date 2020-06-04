@@ -4,9 +4,7 @@ using SCENE::Scene;
 
 void Scene::draw()
 {
-    for(int i=0;i<3;++i)
-        drone[i]->draw();
-    for(int i=0;i<5;++i)
+  for(uint i=0;i<obs.size();++i)
         obs[i]->draw();
 }
 
@@ -16,7 +14,7 @@ void Scene::drone_move(double length, double angle, int n)
     for(int i=0;i<divisor;++i)
     {   
         drone[n]->move(angle,length/divisor);
-        for(int j=0;j<8;++j)
+        for(uint j=0;j<obs.size();++j)
             if(obs[j]->is_collision(*drone[n]))
             {
                 j=obs.size();
@@ -33,7 +31,7 @@ void Scene::drone_rotate(double angle, int n)
     for(int i=0;i<divisor;++i)
     {
     drone[n]->rotate(angle/divisor);
-    for(int j=0;j<8;++j)
+    for(uint j=0;j<obs.size();++j)
         if(obs[j]->is_collision(*drone[n]))
         {
             j=obs.size();

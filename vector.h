@@ -12,9 +12,13 @@ class Vector // Klasa Vector opisujaca matematyczny wektor
 {
 private:
     T data[size]; // tablica sluzaca do przechowywania skladowych wektora
+    static int actual_number_of_vectors;
+    static int total_number_of_vectors;
 public:
     Vector(); // konstruktor domyslny
     explicit Vector(const T * tab); // konstruktor przyjmujacy jako argument tablice wartosci typu double
+    Vector(const Vector & v); // konstruktor kopiujacy
+    ~Vector() {--actual_number_of_vectors;}
     T operator [] (int n) const; // przeciazony operator [] (dostep do skladowych wektora - wersja const)
     T & operator [] (int n); // przeciazony operator [] (dostep do skladowych wektora - wersja bez const)
     Vector operator + (const Vector & v) const; // metoda dodajaca do siebie dwa wektory
@@ -25,6 +29,8 @@ public:
     bool operator==(const Vector & v)const;
     double length() const {return sqrt(*this**this);} // metoda zwracajaca dlugosc wektora
     operator drawNS::Point3D()const {return drawNS::Point3D(data[0],data[1],data[2]);}
+    static int get_total_number_of_vec() {return total_number_of_vectors;}
+    static int get_actual_number_of_vec() {return actual_number_of_vectors;}
 };
 
 /* Funkcje bezposrednio zwiazane z klasa Vector */

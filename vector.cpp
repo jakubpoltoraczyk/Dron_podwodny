@@ -3,10 +3,18 @@
 /* Jest to plik z definicjami wszelkich funkcji zwiazanymi z klasa Vector */
 
 template <typename T,int size>
+int Vector<T,size>::total_number_of_vectors = 0;
+
+template <typename T,int size>
+int Vector<T,size>::actual_number_of_vectors = 0;
+
+template <typename T,int size>
 Vector<T,size>::Vector() // konstruktor domyslny dla klasy Vector
 {
     for(int i=0;i<size;++i) // ustawienie wszystkich skladowych wektora na zera
         data[i]=0.0;
+    ++total_number_of_vectors;
+    ++actual_number_of_vectors;
 }
 
 template <typename T,int size>
@@ -14,8 +22,18 @@ Vector<T,size>::Vector(const T * tab) // konstruktor przyjmujacy tablice jako sw
 {
     for(int i=0;i<size;++i) // ustawienie odpowiednich skladowych wektora elementami tablicy
         data[i]=tab[i];
+    ++total_number_of_vectors;
+    ++actual_number_of_vectors;
 }
 
+template <typename T,int size>
+Vector<T,size>::Vector(const Vector & vec)
+{
+  for(int i=0;i<size;++i)
+    data[i]=vec.data[i];
+  ++total_number_of_vectors;
+  ++actual_number_of_vectors;
+}
 template <typename T,int size>
 T Vector<T,size>::operator [] (int n)const // metoda dostepu do poszczeglonych skladowych wektora (przeciazony [] wersja const)
 {

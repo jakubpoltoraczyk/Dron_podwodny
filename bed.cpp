@@ -33,7 +33,7 @@ bool Bed::is_collision(const Drone_interface & drone)const
 {
     if(std::abs(dim[0][2]-drone.get_center_point()[2])<drone.get_ray())
     {
-        std::cout << "Ruch wstrzymany - kolizja z dnem\n";
+        std::cout << "Drone can't move - collision with bed\n";
         return true;
     }
     else

@@ -36,7 +36,7 @@ bool Water::is_collision(const Drone_interface & drone)const
 {
     if(drone.get_center_point()[2]>dim[0][2])
     {
-        std::cout << "Ruch wstrzymany - kolizja z woda\n";
+        std::cout << "Drone can't move - collision with water\n";
         return true;
     }
     else
