@@ -23,6 +23,8 @@ protected:
     * \brief Punkt srodkowy bryly
     */
     Vector<double,3> center_point;
+    static int total_number_of_solids;
+    static int actual_number_of_solids;
 public:
     /*!
     * \brief Konstruktor
@@ -31,11 +33,16 @@ public:
      * \param g - wskaźnik typu klasy abstrakcyjnej drawNS::3DAPI 
      * \param c - przekazanie nowego koloru rysunku
      */
-    Solid(const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): Drawing_interface(c,g), rot_mat(m), center_point(p) {}
+    Solid(const Vector<double,3> & p, const Matrix<double,3> & m, const std::string & c, std::shared_ptr<drawNS::Draw3DAPI> g): 	      	  Drawing_interface(c,g), rot_mat(m), center_point(p) {++actual_number_of_solids; ++total_number_of_solids;}
+    /*!
+     * \brief Konstruktor kopiujacy
+     * \param s - obiekt klasy Solid do skopiowania
+    */
+    Solid(const Solid & s);
     /*!
     * \brief Destruktor wirtualny
     */
-    virtual ~Solid() {}
+    virtual ~Solid() {--actual_number_of_solids;}
     /*!
     * \brief Metoda czysto abstrakcyjna rysujaca obiekt
     */
@@ -50,6 +57,8 @@ public:
     * \param angle - kat zmiany orientacji
     */
     void rotate(double angle) {erase_object(); rot_mat.rotate_z(angle);}
+    static int get_total_number_of_solids() {return total_number_of_solids;}
+    static int get_actual_number_of_solids() {return actual_number_of_solids;}
 };
 
 #endif // SOLID_H

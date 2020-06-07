@@ -4,8 +4,8 @@ CPPFLAGS = -Wall -pedantic -std=c++17
 
 all: dron clean
 
-dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o scene.o
-	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o scene.o -lpthread
+dron: main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o scene.o solid.o
+	g++ ${CPPFLAGS} -o dron main.o used_templates.o cuboid.o Dr3D_gnuplot_api.o rotation_matrix.o drone.o hexagonal_prism.o rotator.o bed.o water.o cuboid_obstacle.o scene.o solid.o -lpthread
 
 main.o: main.cpp scene.h
 	g++ ${CPPFLAGS} -c main.cpp
@@ -28,8 +28,8 @@ Dr3D_gnuplot_api.o: Dr3D_gnuplot_api.cpp Dr3D_gnuplot_api.hh
 rotation_matrix.o: rotation_matrix.cpp 
 	g++ ${CPPFLAGS} -c rotation_matrix.cpp
 
-solid.h: drawing_interface.h rotation_matrix.h
-	touch drawing_interface.h rotation_matrix.h
+solid.o: solid.cpp
+	g++ ${CPPFLAGS} -c solid.cpp 
 
 hexagonal_prism.o: hexagonal_prism.cpp solid.h
 	g++ ${CPPFLAGS} -c hexagonal_prism.cpp
