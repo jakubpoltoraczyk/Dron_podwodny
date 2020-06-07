@@ -82,7 +82,7 @@ bool Drone::is_collision(const Drone_interface & drone)const
     {
         if((center_point-drone.get_center_point()).length()<ray+drone.get_ray())
         {
-            std::cout << "Ruch wstrzymany - kolizja z dronem\n";
+            std::cout << "Drone can't move - collision with another drone\n";
             return true;
         }
     }
