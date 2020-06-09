@@ -131,5 +131,6 @@ int main()
   std::cout << "Actual number of vectors: " << Vector<double,3>::get_actual_number_of_vec() << std::endl;
   std::cout << "Total number of solids: " << Solid::get_total_number_of_solids() << std::endl;
   std::cout << "Actual number of solids: " << Solid::get_actual_number_of_solids() << std::endl;
+  std::cout << "Goodbye!" << std::endl;
     return 0;
 }
